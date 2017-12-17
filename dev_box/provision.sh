@@ -14,25 +14,11 @@ apt-get -y update >/dev/null 2>&1
 install 'Development tools' build-essential
 
 install Git git
-install SQLite sqlite3 libsqlite3-dev
-install wkhtmltopdf wkhtmltopdf
 install Vim vim
 
 install PostgreSQL postgresql postgresql-contrib libpq-dev
-sudo -u postgres createuser --superuser vagrant
-
-debconf-set-selections <<< 'mysql-server mysql-server/root_password password root'
-debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password root'
-install MySQL mysql-server libmysqlclient-dev
-mysql -uroot -proot <<SQL
-CREATE USER 'vagrant'@'localhost';
-SQL
-
-install 'NodeJS' nodejs
-ln -s /usr/bin/nodejs /usr/sbin/node
-install 'NPM' npm
-echo "Installing Gulp"
-npm install --global gulp-cli >/dev/null 2>&1
+sudo -u postgres createuser --superuser root
+sudo -u postgres createuser --superuser ubuntu
 
 echo "Downloading Go"
 curl --silent https://storage.googleapis.com/golang/go1.8.linux-amd64.tar.gz > /tmp/go.tar.gz
